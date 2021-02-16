@@ -34,8 +34,7 @@ sudo apt update ; sudo apt upgrade -y
 ``` 
 **and `ssh` back into your system before running the `install-vertnode.sh` script.**
 ```
-git clone https://github.com/vertiond/vertnode.git
-cd vertnode/
+git clone https://github.com/vertiond/vertnode.git && cd vertnode
 chmod +x install-vertnode.sh
 ./install-vertnode.sh 
 ```
