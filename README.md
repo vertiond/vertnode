@@ -20,7 +20,7 @@
 - [ ] `Working` **Intel NUC** | Dual-Core 2.16 GHz Intel Celeron | 8GB DDR3 RAM |
 - [ ] `Working` **Rock64 Media Board** | Quad-Core ARM Cortex A53 64-Bit CPU | 4GB LPDDR3 RAM | 
 
-### **`Optional P2Pool Installation Requires minimum 4GB RAM`**
+### **`Optional P2Pool Installation Requires Minimum 4GB RAM`**
 ### **`USB flash drive required: 8GB >`**
 
 ### Supported
@@ -77,7 +77,7 @@ By running a node, you don’t have to rely on any third party to validate a tra
 
 **Running a node, however, requires a permanently connected system with enough resources to process all vertcoin transactions.** Vertcoin nodes also transmit and receive vertcoin transactions and blocks, consuming internet bandwidth. If your internet connection is limited, has a low data cap, or is metered (charged by the gigabit), you should probably not run a vertcoin node on it, or run it in a way that limits its bandwidth usage.
 
-Despite these resource requirements, hundreds of volunteers run vertcoin nodes. **Some are running on systems as simple as a [Raspberry Pi](https://www.canakit.com/raspberry-pi-3-model-b-plus.html) (a $35 USD computer the size of a pack of cards)**. Many volunteers also run vertcoin nodes on rented servers, usually some variant of Linux. A Virtual Private Server (VPS) or Cloud Computing Server instance can be used to run a vertcoin node. Such servers can be rented for $25 to $50 USD per month from a variety of providers.
+Despite these resource requirements, hundreds of volunteers run vertcoin nodes. **Some are running on systems as simple as a [Raspberry Pi](https://www.canakit.com/raspberry-pi-4-4gb.html) (a $55 USD computer the size of a pack of cards)**. Many volunteers also run vertcoin nodes on rented servers, usually some variant of Linux. A Virtual Private Server (VPS) or Cloud Computing Server instance can be used to run a vertcoin node. Such servers can be rented for $25 to $50 USD per month from a variety of providers.
 
 #### Why run a headless node on a Single Board Computer?
 
@@ -91,7 +91,7 @@ Despite these resource requirements, hundreds of volunteers run vertcoin nodes. 
 
 ### How to install Raspberry Pi OS Lite
 **`Download Raspberry Pi OS Lite`**
-`https://www.raspberrypi.org/software/operating-systems/`  
+https://www.raspberrypi.org/software/operating-systems/
 
 We will utilize the software 'Win32 Disk Imager' to format and install Raspbian on the MicroSD card. Please follow the [guide](https://www.raspberrypi.org/documentation/installation/installing-images/windows.md) below for details on installing the Rasbian image to the MicroSD card.
 
