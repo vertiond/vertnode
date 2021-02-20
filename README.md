@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://github.com/vertiond/documents/blob/main/vertnode.png" width="343" height="68" /> <img src="https://i.imgur.com/1RKi4wd.png" width="90">
+  <img src="https://github.com/vertiond/documents/blob/main/vertnode.png" width="425" height="68" /> <img src="https://i.imgur.com/1RKi4wd.png" width="90">
 </p>
 
 ## [Vertcoin.org](https://vertcoin.org/)
