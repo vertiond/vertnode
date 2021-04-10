@@ -494,8 +494,6 @@ function install_vertcoind {
     rm -fR "$userhome"/bin/vertcoin-core
     cd "$userhome"/bin
     git clone https://github.com/vertcoin-project/vertcoin-core
-    git fetch origin pull/135/head:boost
-    git checkout boost
     while true; do        
        if [[ $SYSTEM = "Rockchip"* ]]; then
                 cd "$userhome"/bin/vertcoin-core/
