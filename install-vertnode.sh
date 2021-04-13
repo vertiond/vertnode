@@ -336,7 +336,7 @@ function update_rasp {
 # install_depends | install the required dependencies to run this script
 function install_depends {
     yellowtext 'Installing package dependencies...'
-    sudo apt install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev fail2ban dphys-swapfile unzip python python2.7-dev libgmp-dev
+    sudo apt install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev git fail2ban dphys-swapfile unzip python python2.7-dev libgmp-dev
     greentext 'Successfully installed required dependencies!'
     echo
 }
@@ -509,7 +509,7 @@ function install_vertcoind {
     done
     cd "$userhome"/bin/vertcoin-core/
     make
-    make install
+    sudo make install
     greentext 'Successfully installed Vertcoin Core!'
     echo
 }
