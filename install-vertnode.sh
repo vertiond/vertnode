@@ -32,13 +32,10 @@
 #           grab_vtc_release    | grab the latest vertcoind release from github
 #           wait_for_continue   | function for classic "Press spacebar to continue..." 
 #           grab_vtc_release    | grab the latest vertcoind release from github
-#           grab_bootstrap      | grab the latest bootstrap.dat from alwayshashing
 #           compile_or_compiled | prompt the user for input; would you like to build vertcoin core 
 #           load_blockchain     | prompt the user for input; would you like to sideload the blocks folder and verthash.dat
 #           prompt_p2pool       | function to prompt user with option to install p2pool
 #           install_p2pool      | function to download and configure p2pool
-#           userinput_lit       | function to prompt user with option to install lit and lit-af
-#           install_lit         | function to download and install golang, lit and lit-af
 #           user_intro          | introduction to installation script, any key to continue
 #           installation_report | report back key and contextual information
 #           wait_for_continue   | function for classic "Press spacebar to continue..." 
@@ -178,10 +175,10 @@ function user_intro {
     echo "to the port forwarding section and port forward..."
     echo "$LANIP TCP/UDP 5889"
     echo
-    yellowtext 'What is a full node? It is a Vertcoin server that contains the'
-    yellowtext 'full blockchain and propagates transactions throughout the Vertcoin'
-    yellowtext 'network via peers). Playing its part to keep the Vertcoin peer-to-peer'
-    yellowtext 'network healthy and strong.'
+    echo "What is a full node? A full node will be able to accept incoming connections"
+    echo "and serve archival block data to peers. Full nodes can connect with more peers"
+    echo "than the default which allows for greater throughput of data on the Vertcoin network."
+    echo "This helps keep the Vertcoin peer-to-peer network healthy and strong."
     echo
     read -n 1 -s -r -p "Press any key to continue..."
 }
@@ -215,7 +212,8 @@ function user_input {
         echo "          2048 = 2GB"
         echo "          3072 = 3GB"
         echo "          4096 = 4GB"
-        echo "          5120 = 5GB" 
+        echo "          5120 = 5GB"
+        echo "          0 = Unlimited upload!"
         echo 
         read -p 'maxuploadtarget=' MAXUPLOAD
         # little bit of macgyvering here. this if statement uses -eq for something 
@@ -336,7 +334,7 @@ function update_rasp {
 # install_depends | install the required dependencies to run this script
 function install_depends {
     yellowtext 'Installing package dependencies...'
-    sudo apt install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev git fail2ban dphys-swapfile unzip python python2.7-dev libgmp-dev
+    sudo apt install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev git fail2ban dphys-swapfile unzip python python2.7-dev libgmp-dev bison
     greentext 'Successfully installed required dependencies!'
     echo
 }
@@ -498,12 +496,12 @@ function install_vertcoind {
        if [[ $SYSTEM = "Rockchip"* ]]; then
                 cd "$userhome"/bin/vertcoin-core/
                 ./autogen.sh        
-                ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --enable-upnp-default --build=aarch64-unknown-linux-gnu             
+                ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --disable-tests --disable-bench --enable-upnp-default --build=aarch64-unknown-linux-gnu
                 break
        else
                 cd "$userhome"/bin/vertcoin-core/
                 ./autogen.sh        
-                ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --enable-upnp-default --disable-tests --disable-bench CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" 
+                ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --enable-upnp-default --disable-tests --disable-bench CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768"
                 break
         fi
     done
@@ -550,7 +548,6 @@ function config_vertcoin {
     echo "server=1" >> /home/"$user"/.vertcoin/vertcoin.conf
     echo "rpcuser=$rpcuser" >> /home/"$user"/.vertcoin/vertcoin.conf
     echo "rpcpassword=$rpcpass" >> /home/"$user"/.vertcoin/vertcoin.conf
-    echo "rpcport=5888" >> /home/"$user"/.vertcoin/vertcoin.conf
     echo 'dbcache=100' >> /home/"$user"/.vertcoin/vertcoin.conf
     echo 'maxconnections=30' >> /home/"$user"/.vertcoin/vertcoin.conf
     echo "maxuploadtarget=$MAXUPLOAD" >> /home/"$user"/.vertcoin/vertcoin.conf
@@ -704,10 +701,10 @@ function installation_report {
     echo "to the port forwarding section and port forward..."
     echo "$LANIP TCP/UDP 5889"
     echo
-    echo "What is a full node? It is a Vertcoin server that contains the"
-    echo "full blockchain and propagates transactions throughout the Vertcoin"
-    echo "network via peers). Playing its part to keep the Vertcoin peer-to-peer"
-    echo "network healthy and strong."
+    echo "What is a full node? A full node will be able to accept incoming connections"
+    echo "and serve archival block data to peers. Full nodes can connect with more peers"
+    echo "than the default which allows for greater throughput of data on the Vertcoin network."
+    echo "This helps keep the Vertcoin peer-to-peer network healthy and strong."
     echo
     echo "Useful commands to know:"
     echo "------------------------------------------------------------------------------"
