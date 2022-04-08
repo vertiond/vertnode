@@ -496,7 +496,7 @@ function install_vertcoind {
        if [[ $SYSTEM = "Rockchip"* ]]; then
                 cd "$userhome"/bin/vertcoin-core/
                 ./autogen.sh        
-                ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --disable-tests --disable-bench --enable-upnp-default --build=aarch64-unknown-linux-gnu
+                ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --disable-tests --disable-bench --enable-upnp-default --build=aarch64-linux-gnu
                 break
        else
                 cd "$userhome"/bin/vertcoin-core/
@@ -522,13 +522,15 @@ function grab_vtc_release {
     # grab the latest version number; store in variable $VERSION
     export VERSION=$(curl -s "https://github.com/vertcoin-project/vertcoin-core/releases/latest" | grep -o 'tag/[v.0-9]*' | awk -F/ '{print $2}')
     # grab the latest version release; deviation in release naming scheme will break this
-    # release naming scheme needs to be: 'vertcoind-v(release#)-linux-armhf.zip' to work
-    wget https://github.com/vertcoin-project/vertcoin-core/releases/download/$VERSION/vertcoind-v$VERSION-arm-linux-gnueabihf.zip
-    unzip vertcoind-v$VERSION-arm-linux-gnueabihf.zip
-    # clean up    
-    rm vertcoind-v$VERSION-arm-linux-gnueabihf.zip
-    # move vertcoin binaries to /usr/bin/ 
-    sudo mv vertcoind vertcoin-tx vertcoin-cli vertcoin-wallet /usr/bin/
+    # release naming scheme needs to be: 'vertcoin-(release#)-linux-armhf.zip' to work
+    wget https://github.com/vertcoin-project/vertcoin-core/releases/download/$VERSION/vertcoin-$VERSION-arm-linux-gnueabihf.tar.gz
+    tar -xaf vertcoin-$VERSION-arm-linux-gnueabihf.tar.gz
+    # clean up
+    rm vertcoin-$VERSION-arm-linux-gnueabihf.tar.gz
+    # move vertcoin binaries to /usr/bin/
+    cd vertcoin-$VERSION/bin
+    sudo mv vertcoind vertcoin-tx vertcoin-cli vertcoin-wallet /usr/bin/ && cd ../..
+    rm -r vertcoin-$VERSION
 }
 
 # config_crontab | function to configure crontab to start 
